@@ -1,5 +1,6 @@
 package com.delfa.learning.controller;
 
+import com.delfa.learning.converter.BookConverter;
 import com.delfa.learning.function.SimpleAction;
 import com.delfa.learning.function.SimpleActionParameter;
 import com.delfa.learning.model.Book;
@@ -28,12 +29,23 @@ public class BookController {
     @Autowired
     BookService bookService;
 
+    @Autowired
+    BookConverter bookConverter;
+
     @RequestMapping(path = "/list",
             method = RequestMethod.GET)
     public ResponseEntity<?> getAllBook() {
         List<Book> bookList = bookService.getAllBook();
 
         return new ResponseEntity<>(bookList, HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/list-dto",
+            method = RequestMethod.GET)
+    public ResponseEntity<?> getAllBookDto() {
+        List<Book> bookList = bookService.getAllBook();
+
+        return new ResponseEntity<>(bookConverter.listEntityToDto(bookList), HttpStatus.OK);
     }
 
     @RequestMapping(path = "/list-formatted",
