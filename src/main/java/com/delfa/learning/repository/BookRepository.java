@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    @Query(value = "SELECT price FROM book", nativeQuery = true)
+    @Query(value = "SELECT price FROM Book")
     List<Double> getPriceList();
 }
